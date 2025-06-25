@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS personnalisées pour le design system */
+:root {
+  /* Couleurs primaires */
+  --color-primary: 14 165 233; /* blue-500 */
+  --color-primary-dark: 3 105 161; /* blue-700 */
+  --color-secondary: 148 163 184; /* slate-400 */
+  
+  /* Couleurs pour glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(31, 38, 135, 0.37);
+  
+  /* Espacements Apple-like */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* Base styles avec inspiration Apple */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 font-sans antialiased;
+    font-feature-settings: "cv03", "cv04", "cv11";
+    font-variation-settings: "opsz" 850;
+  }
+  
+  /* Typography scale inspirée d'Apple */
+  h1 {
+    @apply text-4xl font-bold tracking-tight text-slate-900;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold tracking-tight text-slate-800;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold text-slate-800;
+    font-weight: 600;
+  }
+  
+  h4 {
+    @apply text-xl font-medium text-slate-700;
+    font-weight: 500;
+  }
+  
+  /* Focus styles pour l'accessibilité */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500 ring-0;
+  }
+  
+  /* Scrollbar personnalisée */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full hover:bg-slate-400;
+    transition: background-color var(--transition-fast);
+  }
+}
+
+/* Components layer pour les composants réutilisables */
+@layer components {
+  /* Glass card component */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--glass-shadow);
+    @apply rounded-2xl;
+    transition: all var(--transition-normal);
+  }
+  
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  }
+  
+  /* Button styles inspirés d'Apple */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl;
+    @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl;
+    @apply bg-white text-slate-700 hover:bg-slate-50 active:bg-slate-100;
+    @apply border border-slate-200 hover:border-slate-300;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2;
+  }
+  
+  /* Input styles */
+  .input-primary {
+    @apply w-full px-4 py-3 text-sm rounded-xl border border-slate-200;
+    @apply bg-white placeholder-slate-400 text-slate-900;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Card hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-1 shadow-apple-lg;
+  }
+  
+  /* Loading skeleton */
+  .skeleton {
+    @apply animate-pulse bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-blue-600 bg-clip-text text-transparent;
+  }
+  
+  /* Status indicators */
+  .status-success {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800;
+  }
+  
+  .status-warning {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-error {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800;
+  }
+}
+
+/* Utilities layer pour les utilitaires personnalisés */
+@layer utilities {
+  /* Animations personnalisées */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
+  .animate-slideInRight {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  /* Masquage pour lecteurs d'écran */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Utilitaires de responsive */
+  .container-dashboard {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Grid layouts pour dashboard */
+  .grid-dashboard {
+    @apply grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+  }
+  
+  .grid-dashboard-wide {
+    @apply grid gap-6 grid-cols-1 lg:grid-cols-2;
+  }
+  
+  /* Aspect ratios pour graphiques */
+  .aspect-chart {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-square-chart {
+    aspect-ratio: 1 / 1;
+  }
+}
